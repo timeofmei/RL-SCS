@@ -27,6 +27,7 @@ class SCS_Renderer:
         self.game_storage = remote_storage
         self.package_root = get_package_root()
         self.screen = None
+        self.window_closed_by_user = False
 
         # Set the width and height of the output window, in pixels
         self.WINDOW_WIDTH = 1200
@@ -47,6 +48,16 @@ class SCS_Renderer:
         self.initialize_pygame()
 
         if mode == "human":
+            # Keep the event queue flowing so the OS window does not freeze.
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.window_closed_by_user = True
+                    self.close()
+                    return None
+
+            if self.window_closed_by_user:
+                return None
+
             if self.screen is None:
                 self.screen = pygame.display.set_mode([self.WINDOW_WIDTH, self.WINDOW_HEIGHT])
             surface = self.screen
