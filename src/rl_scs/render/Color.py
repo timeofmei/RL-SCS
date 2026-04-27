@@ -18,7 +18,8 @@ class Color(Enum):
     def rgb(self):
         return self.value
 
-    def str_to_rgb(self, color_str: str):
+    @staticmethod
+    def str_to_rgb(color_str: str):
         # There must be a better way of doing this
         match color_str:
             case "green":

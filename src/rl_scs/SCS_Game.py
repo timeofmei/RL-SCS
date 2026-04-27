@@ -1888,12 +1888,18 @@ class SCS_Game(AECEnv):
                 case "Map":
                     self.terrain_types = []
                     for id, properties in self.terrain_by_id.items():
+                        terrain_image_path = properties.get("image_path")
+                        if terrain_image_path is not None and not os.path.isabs(terrain_image_path):
+                            filename = os.path.basename(terrain_image_path)
+                            resolved = str(self.package_root / "assets" / filename)
+                            if os.path.isfile(resolved):
+                                terrain_image_path = resolved
                         instance =  Terrain(
                             attack_modifier=properties["attack_modifier"],
                             defense_modifier=properties["defense_modifier"],
-                            cost=properties["cost"], 
+                            cost=properties["cost"],
                             name=properties["name"],
-                            image_path=properties.get("image_path")
+                            image_path=terrain_image_path
                         )
                         
                         properties["instance"] = instance
@@ -2049,7 +2055,12 @@ class SCS_Game(AECEnv):
         image_path = unit_details.get("image_path")
         if image_path is None:
             image_name = "p" + str(player) + "_" + name
-            image_path = str(self.package_root / "assets" / f"{image_name}.jpg")
+            png_path = str(self.package_root / "assets" / f"p{player+1}_{name.lower()}.png")
+            jpg_path = str(self.package_root / "assets" / f"{image_name}.jpg")
+            if os.path.isfile(png_path):
+                image_path = png_path
+            else:
+                image_path = jpg_path
             if not os.path.isfile(image_path):
                 print("No image path provided")
                 print("Automatically creating image for unit.")

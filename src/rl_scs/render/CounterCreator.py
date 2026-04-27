@@ -1,5 +1,6 @@
 from ..utils.package_utils import get_package_root
 from .Color import Color
+from .fonts import FONT_SANS
 import pygame
 
 class CounterCreator:
@@ -74,7 +75,7 @@ class CounterCreator:
         stats_area_h = stats_area_rect.height
 
         stats_text = str(attack) + " - "  + str(defense) + " - "  + str(movement)
-        stats_font = pygame.font.SysFont("uroob", 200)
+        stats_font = pygame.font.SysFont(FONT_SANS, 200)
         stats_surface = stats_font.render(stats_text, True, Color.BLACK.rgb())
         stats_surface = pygame.transform.scale(stats_surface, (0.75*stats_area_w, 1.1*stats_area_h))
         stats_rect = stats_surface.get_rect(center=stats_area_rect.center)
@@ -122,7 +123,7 @@ class CounterCreator:
         stats_area_h = stats_area_rect.height
 
         stats_text = str(attack) + " - "  + str(defense) + " - "  + str(movement)
-        stats_font = pygame.font.SysFont("uroob", 200)
+        stats_font = pygame.font.SysFont(FONT_SANS, 200)
         stats_surface = stats_font.render(stats_text, True, Color.BLACK.rgb())
         stats_surface = pygame.transform.scale(stats_surface, (0.75*stats_area_w, 1.1*stats_area_h))
         stats_rect = stats_surface.get_rect(center=stats_area_rect.center)

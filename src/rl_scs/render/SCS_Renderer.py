@@ -10,6 +10,7 @@ import pygame
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 from termcolor import colored
+from .fonts import FONT_SANS, FONT_MONO
 from .Color import Color
 from .CounterCreator import CounterCreator
 from ..utils.package_utils import get_package_root
@@ -238,24 +239,24 @@ class SCS_Renderer:
 
             action_number_text = "Actions played: " + str(action_index)
 
-            action_font = pygame.font.SysFont("meera", 40)
+            action_font = pygame.font.SysFont(FONT_SANS, 40)
             action_block = action_font.render(action_text, True, action_color)
             action_rect = action_block.get_rect(center=(self.WINDOW_WIDTH/2, 50))
             screen.blit(action_block, action_rect)
 
 
             turn_text = "Turn: " + str(render_game.current_turn)
-            turn_font = pygame.font.SysFont("rachana", 25)
+            turn_font = pygame.font.SysFont(FONT_SANS, 25)
             turn_block = turn_font.render(turn_text, True, Color.BLACK.rgb())
             turn_rect = turn_block.get_rect(topleft=(5, 5))
             screen.blit(turn_block, turn_rect)
 
-            action_number_font = pygame.font.SysFont('notosansmono', 20)
+            action_number_font = pygame.font.SysFont(FONT_MONO, 20)
             action_number_block = action_number_font.render(action_number_text, True, Color.GREEN.rgb())
             action_number_rect = action_number_block.get_rect(bottomleft=(5, self.WINDOW_HEIGHT-5))
             screen.blit(action_number_block, action_number_rect)
 
-            winner_font = pygame.font.SysFont('notosansmonocjkkr', 20)
+            winner_font = pygame.font.SysFont(FONT_MONO, 20)
             winner_font.set_bold(True)
             winner_block = winner_font.render(winner_text, True, Color.ORANGE.rgb())
             winner_rect = winner_block.get_rect(bottomright=(self.WINDOW_WIDTH-5, self.WINDOW_HEIGHT-5))
@@ -396,12 +397,12 @@ class SCS_Renderer:
 
                 # BOARD NUMBERS
                 if j==0:
-                    number_font = pygame.font.SysFont("uroob", 30)
+                    number_font = pygame.font.SysFont(FONT_SANS, 30)
                     number_block = number_font.render(str(i+1), True, Color.BLACK.rgb())
                     number_rect = number_block.get_rect(center=(board_x - numbers_gap, center_y))
                     screen.blit(number_block, number_rect)
                 if i==0:
-                    number_font = pygame.font.SysFont("uroob", 30)
+                    number_font = pygame.font.SysFont(FONT_SANS, 30)
                     number_block = number_font.render(str(j+1), True, Color.BLACK.rgb())
                     number_rect = number_block.get_rect(center=(center_x, board_y - numbers_gap))
                     screen.blit(number_block, number_rect)
@@ -439,7 +440,7 @@ class SCS_Renderer:
                         idx = positions.index((i,j))
                         value = values[idx]
                         value_text = format(value, '.3')
-                        value_font = pygame.font.SysFont('notosansmonocjkkr', 25)
+                        value_font = pygame.font.SysFont(FONT_MONO, 25)
                         value_font.set_bold(True)
                         value_block = value_font.render(value_text, True, Color.BLACK.rgb())
                         value_text_position = (tile_rect.center)
@@ -613,7 +614,7 @@ class SCS_Renderer:
         for i in range(GAME_HEIGHT):
             
             # BOARD NUMBERS
-            number_font = pygame.font.SysFont("uroob", 30)
+            number_font = pygame.font.SysFont(FONT_SANS, 30)
             number_block = number_font.render(str(i+1), True, Color.BLACK.rgb())
             number_rect = number_block.get_rect(center=(board_position[0] - numbers_gap, board_position[1] + tile_height/2 + (tile_height)*i))
             screen.blit(number_block, number_rect)
@@ -627,7 +628,7 @@ class SCS_Renderer:
 
                 # BOARD NUMBERS
                 if i==0:
-                    number_font = pygame.font.SysFont("uroob", 30)
+                    number_font = pygame.font.SysFont(FONT_SANS, 30)
                     number_block = number_font.render(str(j+1), True, Color.BLACK.rgb())
                     number_rect = number_block.get_rect(center=(board_position[0] + tile_width/2 + (tile_width)*j, board_position[1] - numbers_gap))
                     screen.blit(number_block, number_rect)
@@ -661,7 +662,7 @@ class SCS_Renderer:
                         idx = positions.index((i,j))
                         value = values[idx]
                         value_text = format(value, '.3')
-                        value_font = pygame.font.SysFont('notosansmonocjkkr', 25)
+                        value_font = pygame.font.SysFont(FONT_MONO, 25)
                         value_font.set_bold(True)
                         value_block = value_font.render(value_text, True, Color.BLACK.rgb())
                         value_text_position = (tile_position[0] + tile_height/2, tile_position[1] + tile_width/2)
@@ -734,7 +735,7 @@ class SCS_Renderer:
 
 
             title_text = "SCS Value Debug"
-            title_font = pygame.font.SysFont("meera", 40)
+            title_font = pygame.font.SysFont(FONT_SANS, 40)
             title_block = title_font.render(title_text, True, Color.RED.rgb())
             title_rect = title_block.get_rect(center=(self.WINDOW_WIDTH/2, 50))
             screen.blit(title_block, title_rect)

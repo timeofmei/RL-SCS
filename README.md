@@ -8,6 +8,25 @@ A simplified implementation of Standard Combat Series (SCS) games for reinforcem
 
 - [Installation](docs/install.md)
 
+## Running the Game
+
+Use the included `run_game.py` script to watch a game with random AI:
+
+```bash
+uv sync --group dev
+python run_game.py
+```
+
+This opens a pygame window and prints step-by-step logs to the terminal. Adjust `STEP_DELAY` at the top of `run_game.py` to control speed (seconds per step).
+
+To use a different map, change the config file name:
+
+```python
+config = get_package_root() / "example_configurations" / "solo_soldier_config_5.yml"
+```
+
+Available example configs are in `src/rl_scs/example_configurations/`.
+
 ## Usage
 
 RL-SCS implements the PettingZoo AEC API, so it works out of the box with any compatible RL library.
